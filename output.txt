@@ -1,1 +1,3 @@
-0
+Enter size of list
+Enter values
+134
