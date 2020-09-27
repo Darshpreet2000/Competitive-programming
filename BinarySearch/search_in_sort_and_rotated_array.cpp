@@ -1,48 +1,41 @@
 #include<bits/stdc++.h>
 using namespace std;
-
+#define ll long long int
 int main(){
-	#ifndef ONLINE_JUDGE
-    // for getting input from input.txt
-    freopen("D://Competitive-programming//input.txt", "r", stdin);
-    // for writing output to output.txt
-    freopen("D://Competitive-programming//output.txt", "w", stdout);
-#endif
+    ll n;
+    cin>>n;
+    ll a[n],item;
 
-   std::vector<int> v;
-   int n,num,search;
-   cin>>n;
-   for(int i=0;i<n;i++){
-   	  cin>>num;
-   	  v.push_back(num);
-   }
-cin>>search;
-  // Need to find number from rotated & sorted array
+    for(int i=0;i<n;i++){
+        cin>>a[i];
+    }
+    cin>>item;
+    ll beg=0,end=n-1,mid;
 
-   int beg=0,end=n-1;
-   while(beg<=end){
-       int mid=(beg+end)/2;
-       if(v[mid]==search){
-       	 cout<<mid;
-       	 break;
-       }
-       else if(v[beg]<v[mid]){
-            //binary search here
-           if(search<=v[mid] and search>=v[beg])
-       	     end=mid-1;
-       	  else
+      while(beg<=end){
+           mid=(beg+end)/2;
+        if(a[mid]==item){
+            cout<<mid;
+            break;
+        }
+       else if(a[mid]>=a[0]){
+          if(a[mid]>item&&item>=a[0])
+           end=mid-1;
+          else if(a[mid]>item&&item<a[0])
+            beg=mid+1;
+        else{
+            beg=mid+1;
+        // cout<<""<<beg<<" "<<end;
+          }
+        }
+        else if(a[mid]<=a[n-1]){
+           if(item>a[mid]&&item<=a[n-1])
              beg=mid+1;
-       }
-       else{
-       	  if(search>=v[mid]&&search<=v[end]){
-              beg=mid+1;
-       	  }
-       	  else{
-       	  	end=mid-1;
-       	  }
-
-       }
-   }
-
+           else if(item>a[mid])
+            end=mid-1;
+            else
+                beg=mid+1;
+        }
+    }
   return 0;
-}		
+}
