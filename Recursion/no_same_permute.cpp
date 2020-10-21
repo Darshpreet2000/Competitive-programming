@@ -1,19 +1,21 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long int
-set<vector<ll>> p;
 void permute(ll s[],vector<ll> e,int i,int n){
 
    if(i==n){
-     p.insert(e);
+        for(i=0;i<n;i++)
+        cout<<e[i]<<" ";
+        cout<<"\n";
      return;
    }
    for(int k=i;k<n;k++){
-      swap(s[k],s[i]);
-      e.push_back(s[i]);
-      permute(s,e,i+1,n);
-      e.pop_back();
-     swap(s[k],s[i]);
+		if(i== k or s[k]!=s[i]){
+       swap(s[k],s[i]);
+       e.push_back(s[i]);
+       permute(s,e,i+1,n);
+         swap(s[k],s[i]);
+     }
    }
    return;
 }
@@ -27,13 +29,9 @@ int main(){
         cin>>n;
         for(int i=0;i<n;i++)
             cin>>a[i];
-        permute(a,e,0,n);
-   for(auto it:p){
-        for(int i=0;i<it.size();i++)
-        cout<<it[i]<<" ";
 
-   cout<<"\n";
-      }
+        permute(a,e,0,n);
+
     }
 
 return 0;
